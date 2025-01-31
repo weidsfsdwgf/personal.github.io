@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代风格博客</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loader"></div>
+
+    <!-- 浮动导航 -->
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">TechBlog</div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="#"><i class="fas fa-feather"></i> 文章</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> 联系</a></li>
+            </ul>
+            <div class="social">
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-weixin"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容区 -->
+    <main>
+        <!-- 特色文章 -->
+        <section class="featured-post">
+            <div class="post-content">
+                <span class="category">科技前沿</span>
+                <h1>人工智能的未来发展</h1>
+                <p>探索AI技术如何改变我们的生活方式...</p>
+                <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- 文章网格 -->
+        <div class="grid-container">
+            <article class="card">
+                <div class="card-header">
+                    <img src="https://picsum.photos/400/300?random=1" alt="文章图片">
+                </div>
+                <div class="card-body">
+                    <span class="tag">编程</span>
+                    <h2>Python入门指南</h2>
+                    <p>从零开始学习Python编程的最佳实践...</p>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/40" alt="作者头像">
+                        <div>
+                            <h3>张三</h3>
+                            <small>5天前 · 10分钟阅读</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <img src="https://picsum.photos/400/300?random=2" alt="文章图片">
+                </div>
+                <div class="card-body">
+                    <span class="tag">设计</span>
+                    <h2>现代UI设计趋势</h2>
+                    <p>2023年最值得关注的用户界面设计方向...</p>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/40" alt="作者头像">
+                        <div>
+                            <h3>李四</h3>
+                            <small>3天前 · 8分钟阅读</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>关于我们</h3>
+                <p>探索科技与设计的完美结合</p>
+            </div>
+            <div class="footer-section links">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">服务条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 TechBlog - 保留所有权利
+        </div>
+    </footer>
+
+    <script>
+        // 简单加载动画控制
+        window.addEventListener('load', () => {
+            document.querySelector('.loader').style.display = 'none';
+        });
+
+        // 图片点击放大效果
+        document.querySelectorAll('.card-header img').forEach(img => {
+            img.onclick = () => {
+                img.classList.toggle('zoomed');
+            }
+        });
+    </script>
+</body>
+</html>
