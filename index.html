@@ -14,15 +14,25 @@
     <!-- 浮动导航 -->
     <nav class="glass-nav">
         <div class="nav-content">
-            <div class="logo">TechBlog</div>
+            <div class="logo">🍃MyHome</div>
             <ul class="nav-links">
                 <li><a href="#"><i class="fas fa-home"></i> 首页</a></li>
-                <li><a href="#"><i class="fas fa-feather"></i> 文章</a></li>
+                <li><a href="#"><i class="fas fa-feather"></i> 作品集</a></li>
                 <li><a href="#"><i class="fas fa-envelope"></i> 联系</a></li>
             </ul>
-            <div class="social">
-                <a href="#"><i class="fab fa-weibo"></i></a>
-                <a href="#"><i class="fab fa-weixin"></i></a>
+            <div class="social-icons">
+                <a href="#" class="social-icon wechat">
+                    <i class="fab fa-weixin"></i>
+                    <div class="wechat-qr-container">
+                        <img src="images/pictures/wechat.jpg" alt="微信二维码" class="wechat-qr">
+                    </div>
+                </a>
+                <a href="https://weibo.com/u/2749973005" target="_blank" class="social-icon weibo">
+                    <i class="fab fa-weibo"></i>
+                </a>
+                <a href="https://space.bilibili.com/488005172?spm_id_from=333.1387.0.0" target="_blank" class="social-icon bilibili">
+                    <i class="fab fa-bilibili"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -32,10 +42,9 @@
         <!-- 特色文章 -->
         <section class="featured-post">
             <div class="post-content">
-                <span class="category">科技前沿</span>
-                <h1>人工智能的未来发展</h1>
-                <p>探索AI技术如何改变我们的生活方式...</p>
-                <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                <h1>Welcome</h1>
+                <p>行到水穷处，坐看云起时。在快与慢之间，寻找属于自己的节奏</p>
+                <a href="https://modao.cc/axbox/share/VYD8PF4csnhffpxet4CdxU?screen=urjv6i&hpl=1&hpr=1&f=1&s=0" class="read-more">查看作品</a>
             </div>
         </section>
 
@@ -95,22 +104,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2023 TechBlog - 保留所有权利
+            &copy; 2023 MyHome - 保留所有权利
         </div>
     </footer>
-
-    <script>
-        // 简单加载动画控制
-        window.addEventListener('load', () => {
-            document.querySelector('.loader').style.display = 'none';
-        });
-
-        // 图片点击放大效果
-        document.querySelectorAll('.card-header img').forEach(img => {
-            img.onclick = () => {
-                img.classList.toggle('zoomed');
-            }
-        });
-    </script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>
