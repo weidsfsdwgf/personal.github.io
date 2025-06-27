@@ -2,43 +2,36 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>自动跳转聊天</title>
+  <title>跳转聊天窗口</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 引入钉钉 JS SDK -->
+  <!-- 钉钉 JS SDK -->
   <script src="https://g.alicdn.com/dingding/open-develop/1.14.3/dingtalk.js"></script>
 </head>
 <body>
-  <h3>正在为您打开聊天窗口...</h3>
+  <h2>点击按钮跳转到聊天窗口</h2>
+  <button onclick="openChat()">打开聊天</button>
 
   <script>
-    // ====== 请替换为你自己的真实参数 ======
-    const CORP_ID = 'your_corp_id_here'; // 可选：有些接口需要
-    const CONVERSATION_ID = 'your_conversation_id_here'; // ✅ 必填：单聊会话ID
-    // =====================================
+    function openChat() {
+      var conversationId = 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=';
 
-    document.addEventListener('DOMContentLoaded', function () {
-      // 等待钉钉环境准备就绪
       dd.ready(function () {
-        console.log('[dd.ready] 钉钉环境准备完成');
-
-        // 自动打开聊天窗口
         dd.biz.chat.openChatByConversationId({
-          conversationId: CONVERSATION_ID,
+          conversationId: conversationId,
           onSuccess: function () {
-            console.log('✅ 已成功跳转到聊天窗口');
+            console.log('已跳转至聊天窗口');
           },
           onFail: function (err) {
-            console.error('❌ 跳转失败：', err);
+            console.error('跳转失败：', err);
             alert('跳转失败：' + JSON.stringify(err));
           }
         });
       });
 
       dd.error(function (err) {
-        console.error('❌ 钉钉SDK初始化失败：', err);
-        alert('钉钉环境加载失败：' + JSON.stringify(err));
+        alert('钉钉环境初始化失败：' + JSON.stringify(err));
       });
-    });
+    }
   </script>
 </body>
 </html>
