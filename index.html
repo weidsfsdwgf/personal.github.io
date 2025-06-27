@@ -1,48 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <title>钉钉聊天测试页面</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 钉钉 SDK -->
-  <script src="https://g.alicdn.com/dingding/open-develop/1.14.3/dingtalk.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目导航面板</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h2>钉钉聊天窗口跳转测试</h2>
-  <button onclick="openChat()">点击打开聊天窗口</button>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold text-gray-800">项目导航</div>
+    <div class="space-x-4">
+      <button onclick="loadPage('axure')" class="text-blue-600 hover:underline">原型页面</button>
+      <button onclick="loadPage('doc')" class="text-green-600 hover:underline">产品文档</button>
+      <button onclick="loadPage('task')" class="text-purple-600 hover:underline">任务管理</button>
+    </div>
+  </nav>
+
+  <!-- 主体内容区域 -->
+  <main class="flex-grow flex items-center justify-center">
+    <iframe id="contentFrame" src="https://codesign.qq.com/s/533480700921837" class="w-full h-full max-w-5xl max-h-[90vh] rounded-xl shadow-xl border border-gray-300"></iframe>
+  </main>
 
   <script>
-    function openChat() {
-      const openConversationId = 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=';
-
-      if (!/DingTalk/.test(navigator.userAgent)) {
-        alert('请在钉钉客户端中打开本页面');
-        return;
-      }
-
-      dd.ready(function () {
-        console.log('[dd.ready] 钉钉环境初始化成功');
-
-        dd.openChatByConversationId({
-          openConversationId: openConversationId,
-          success: function () {
-            console.log('✅ 聊天窗口打开成功');
-            alert('✅ 已跳转至聊天窗口');
-          },
-          fail: function (err) {
-            console.error('❌ 跳转失败:', err);
-            alert('❌ 跳转失败：' + JSON.stringify(err));
-          },
-          complete: function () {
-            console.log('[dd] 操作完成');
-          }
-        });
-      });
-
-      dd.error(function (err) {
-        console.error('❌ SDK 初始化失败:', err);
-        alert('❌ SDK 初始化失败：' + JSON.stringify(err));
-      });
+    function loadPage(type) {
+      const frame = document.getElementById('contentFrame');
+      const urls = {
+        axure: 'https://your-axure-url.com',
+        doc: 'https://your-doc-url.com',
+        task: 'https://your-task-url.com'
+      };
+      frame.src = urls[type];
     }
   </script>
 </body>
