@@ -2,36 +2,41 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>打开钉钉聊天窗口</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试打开钉钉聊天窗口</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://g.alicdn.com/dingding/open-develop/1.14.3/dingtalk.js"></script>
 </head>
 <body>
-  <h3>点击按钮打开聊天窗口</h3>
-  <button onclick="openChat()">打开聊天</button>
+  <h2>点击下面按钮测试跳转聊天</h2>
+  <button onclick="openChat()">打开聊天窗口</button>
 
   <script>
     function openChat() {
-      const conversationId = 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=';
+      const cid = 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=';
+
+      if (!/DingTalk/.test(navigator.userAgent)) {
+        alert('请在钉钉客户端中打开页面');
+        return;
+      }
 
       dd.ready(function () {
+        console.log('SDK Ready');
+
         dd.openChatByConversationId({
-          openConversationId: conversationId,
+          openConversationId: cid,
           success: function () {
-            console.log('✅ 聊天窗口打开成功');
+            console.log('✅ 成功跳转');
+            alert('跳转成功');
           },
           fail: function (err) {
-            console.error('❌ 打开失败：', err);
+            console.error('❌ 跳转失败:', err);
             alert('跳转失败：' + JSON.stringify(err));
-          },
-          complete: function () {
-            console.log('操作完成');
           }
         });
       });
 
       dd.error(function (err) {
-        console.error('❌ SDK 初始化失败：', err);
+        console.error('❌ SDK 初始化失败:', err);
         alert('SDK 初始化失败：' + JSON.stringify(err));
       });
     }
