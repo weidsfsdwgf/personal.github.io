@@ -5,10 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>项目导航面板</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #f3f4f6; /* tailwind gray-100 */
+      height: 100vh;
+    }
+    main {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0.75rem; /* rounded-xl */
+      box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.3), 0 4px 6px -2px rgb(139 92 246 / 0.05); /* shadow-xl purple */
+      max-width: 1440px;
+      max-height: calc(100vh - 64px); /* 顶部导航栏64px高度 */
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body>
   <!-- 顶部导航栏 -->
-  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center" style="height:64px;">
     <div class="text-xl font-bold text-gray-800">项目导航</div>
     <div class="space-x-4">
       <button onclick="loadPage('axure')" class="text-blue-600 hover:underline">原型页面</button>
@@ -18,8 +45,8 @@
   </nav>
 
   <!-- 主体内容区域 -->
-  <main class="flex-grow flex items-center justify-center">
-    <iframe id="contentFrame" src="https://codesign.qq.com/s/533480700921837" class="w-full h-full max-w-5xl max-h-[90vh] rounded-xl shadow-xl border border-gray-300"></iframe>
+  <main>
+    <iframe id="contentFrame" src="https://your-axure-url.com"></iframe>
   </main>
 
   <script>
