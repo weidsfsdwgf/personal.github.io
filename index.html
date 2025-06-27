@@ -1,112 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>现代风格博客</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>自动跳转聊天</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入钉钉 JS SDK -->
+  <script src="https://g.alicdn.com/dingding/open-develop/1.14.3/dingtalk.js"></script>
 </head>
 <body>
-    <!-- 加载动画 -->
-    <div class="loader"></div>
+  <h3>正在为您打开聊天窗口...</h3>
 
-    <!-- 浮动导航 -->
-    <nav class="glass-nav">
-        <div class="nav-content">
-            <div class="logo">🍃MyHome</div>
-            <ul class="nav-links">
-                <li><a href="#"><i class="fas fa-home"></i> 首页</a></li>
-                <li><a href="#"><i class="fas fa-feather"></i> 作品集</a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i> 联系</a></li>
-            </ul>
-            <div class="social-icons">
-                <a href="#" class="social-icon wechat">
-                    <i class="fab fa-weixin"></i>
-                    <div class="wechat-qr-container">
-                        <img src="images/pictures/wechat.jpg" alt="微信二维码" class="wechat-qr">
-                    </div>
-                </a>
-                <a href="https://weibo.com/u/2749973005" target="_blank" class="social-icon weibo">
-                    <i class="fab fa-weibo"></i>
-                </a>
-                <a href="https://space.bilibili.com/488005172?spm_id_from=333.1387.0.0" target="_blank" class="social-icon bilibili">
-                    <i class="fab fa-bilibili"></i>
-                </a>
-            </div>
-        </div>
-    </nav>
+  <script>
+    // ====== 请替换为你自己的真实参数 ======
+    const CORP_ID = 'your_corp_id_here'; // 可选：有些接口需要
+    const CONVERSATION_ID = 'your_conversation_id_here'; // ✅ 必填：单聊会话ID
+    // =====================================
 
-    <!-- 内容区 -->
-    <main>
-        <!-- 特色文章 -->
-        <section class="featured-post">
-            <div class="post-content">
-                <h1>Welcome</h1>
-                <p>行到水穷处，坐看云起时。在快与慢之间，寻找属于自己的节奏</p>
-                <a href="https://modao.cc/axbox/share/VYD8PF4csnhffpxet4CdxU?screen=urjv6i&hpl=1&hpr=1&f=1&s=0" class="read-more">查看作品</a>
-            </div>
-        </section>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 等待钉钉环境准备就绪
+      dd.ready(function () {
+        console.log('[dd.ready] 钉钉环境准备完成');
 
-        <!-- 文章网格 -->
-        <div class="grid-container">
-            <article class="card">
-                <div class="card-header">
-                    <img src="https://picsum.photos/400/300?random=1" alt="文章图片">
-                </div>
-                <div class="card-body">
-                    <span class="tag">编程</span>
-                    <h2>Python入门指南</h2>
-                    <p>从零开始学习Python编程的最佳实践...</p>
-                    <div class="author">
-                        <img src="https://i.pravatar.cc/40" alt="作者头像">
-                        <div>
-                            <h3>张三</h3>
-                            <small>5天前 · 10分钟阅读</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        // 自动打开聊天窗口
+        dd.biz.chat.openChatByConversationId({
+          conversationId: CONVERSATION_ID,
+          onSuccess: function () {
+            console.log('✅ 已成功跳转到聊天窗口');
+          },
+          onFail: function (err) {
+            console.error('❌ 跳转失败：', err);
+            alert('跳转失败：' + JSON.stringify(err));
+          }
+        });
+      });
 
-            <article class="card">
-                <div class="card-header">
-                    <img src="https://picsum.photos/400/300?random=2" alt="文章图片">
-                </div>
-                <div class="card-body">
-                    <span class="tag">设计</span>
-                    <h2>现代UI设计趋势</h2>
-                    <p>2023年最值得关注的用户界面设计方向...</p>
-                    <div class="author">
-                        <img src="https://i.pravatar.cc/40" alt="作者头像">
-                        <div>
-                            <h3>李四</h3>
-                            <small>3天前 · 8分钟阅读</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </main>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>关于我们</h3>
-                <p>探索科技与设计的完美结合</p>
-            </div>
-            <div class="footer-section links">
-                <h3>快速链接</h3>
-                <ul>
-                    <li><a href="#">隐私政策</a></li>
-                    <li><a href="#">服务条款</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2023 MyHome - 保留所有权利
-        </div>
-    </footer>
-    <script src="javascript/script.js"></script>
+      dd.error(function (err) {
+        console.error('❌ 钉钉SDK初始化失败：', err);
+        alert('钉钉环境加载失败：' + JSON.stringify(err));
+      });
+    });
+  </script>
 </body>
 </html>
