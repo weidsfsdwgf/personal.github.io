@@ -1,68 +1,38 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>项目导航面板</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      background-color: #f3f4f6;
-      height: 100vh;
-    }
-    nav {
-      height: 64px;
-      flex-shrink: 0;
-    }
-    main {
-      flex-grow: 1;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 0.75rem;
-      box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.3), 0 4px 6px -2px rgb(139 92 246 / 0.05);
-      max-width: 100vw;
-      max-height: calc(100vh - 64px);
-      display: block;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>正在跳转</title>
+  <script src="https://g.alicdn.com/dingding/open-develop/1.10.0/dingtalk.js"></script>
 </head>
 <body>
-  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-    <div class="text-xl font-bold text-gray-800">项目导航</div>
-    <div class="space-x-4">
-      <button onclick="loadPage('axure')" class="text-blue-600 hover:underline">原型页面</button>
-      <button onclick="loadPage('doc')" class="text-green-600 hover:underline">产品文档</button>
-      <button onclick="loadPage('task')" class="text-purple-600 hover:underline">任务管理</button>
-    </div>
-  </nav>
-
-  <main>
-    <iframe id="contentFrame" src="https://codesign.qq.com/s/533480700921837" title="内容展示区"></iframe>
-  </main>
-
+  <p>正在跳转中，请稍候...</p>
   <script>
-    function loadPage(type) {
-      const frame = document.getElementById('contentFrame');
-      const urls = {
-        axure: 'https://codesign.qq.com/s/533480700921837', // 示例Axure预览地址
-        doc: 'https://zv8qam54jfr.feishu.cn/wiki/Jlk4wqPg0ij6xCk9sRKc7GLGnMh?from=from_copylink', // 示例文档地址
-        task: 'https://www.tapd.cn/tapd_fe/61805538/story/list?categoryId=0&sort_name=name&order=asc&useScene=storyList&groupType=&conf_id=1161805538001000097' // 示例任务管理系统（Trello）
-      };
-      frame.src = urls[type];
-    }
+    const pageUrl = location.href.split('#')[0];
+    fetch(`http://localhost:3000/ding-sign?url=${encodeURIComponent(pageUrl)}`)
+      .then(res => res.json())
+      .then(config => {
+        dd.config({
+          agentId: config.agentId,
+          corpId: config.corpId,
+          timeStamp: config.timeStamp,
+          nonceStr: config.nonceStr,
+          signature: config.signature,
+          jsApiList: ['openChatByConversationId']
+        });
+  
+        dd.ready(function () {
+          dd.openChatByConversationId({
+            openConversationId: 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=', // 替换为实际的会话ID
+            success: function () {
+              console.log('打开成功');
+            },
+            fail: function (err) {
+              console.error('打开失败', err);
+            }
+          });
+        });
+      });
   </script>
 </body>
 </html>
