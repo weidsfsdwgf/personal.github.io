@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>钉钉 H5 应用</title>
+  <script src="https://g.alicdn.com/dingding/dingtalk-jsapi/3.7.47/dingtalk.open.js"></script>
+</head>
+<body>
+  <h2>欢迎访问钉钉 H5 应用</h2>
+  <script>
+    const pageUrl = location.href.split('#')[0];
+
+    fetch(`https://wei2000.fun/api/ding-sign?url=${encodeURIComponent(pageUrl)}`)
+      .then(res => res.json())
+      .then(config => {
+        dd.config({
+          agentId: config.agentId,
+          corpId: config.corpId,
+          timeStamp: config.timeStamp,
+          nonceStr: config.nonceStr,
+          signature: config.signature,
+          jsApiList: ['openChatByConversationId']
+        });
+
+        dd.ready(() => {
+          dd.openChatByConversationId({
+            openConversationId: 'cid0mZabRF1nv7iJ6b14g2fCWyKAaQ7EQJBH0euT+f65Sg=', // 替换成你的 conversationId
+            success: () => alert('已打开单聊'),
+            fail: err => alert('失败: ' + JSON.stringify(err))
+          });
+        });
+
+        dd.error(function(err) {
+          alert('dd.config 错误: ' + JSON.stringify(err));
+        });
+      });
+  </script>
+</body>
+</html>
