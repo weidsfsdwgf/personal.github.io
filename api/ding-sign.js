@@ -4,8 +4,8 @@ const crypto = require('crypto');
 const config = {
   appKey: 'dinghyoiblhw30rmp3h4',
   appSecret: 'G8BfCNyl999WUfXR_pEyQPBcPDkpGmrh09e3Jwu07RGq6scarnPD6JCNkNDdvqgh',
-  agentId: 'your-agent-id',
-  corpId: 'your-corp-id'
+  agentId: '3923763185',
+  corpId: 'ding9f4b80a6ddbade5fee0f45d8e4f7c288'
 };
 
 let cache = {
