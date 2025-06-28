@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "ding-sign.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/ding-sign", "dest": "/ding-sign.js" }
+  ]
+}
